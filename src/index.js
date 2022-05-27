@@ -25,10 +25,8 @@ let addTaskListeners = function(){
     let todoDelete = todo.querySelector('span')
     todoDelete.addEventListener('click', () => {
       console.log('hello')
-      // if(todoDelete.id === todo.id){ //THIS
         todo.remove()
         for(let category of currentCategories){
-          // console.log(category)
           for(let task of category.taskList){
             if(task.identifier === todo.id){
               console.log(category)
@@ -38,14 +36,11 @@ let addTaskListeners = function(){
           }
         }
         console.log(`I am ${todo.id}`)
-      // } //THIS
-      // console.log(todoDelete)
-    })
-    
+    }) 
   }
 }
 
-// function for if there are no categories left
+// check if there are categories left
 let noCategoryCheck = function(){
   let categoryRoot = document.querySelector('.category-card')
   console.log(categoryRoot.children.length)
@@ -53,7 +48,6 @@ let noCategoryCheck = function(){
     return true
   }
   else {return false}
-  // return categoryRoot.hasChildNodes()
 }
 
 
@@ -95,12 +89,11 @@ categoryForm.onsubmit = function(e) {
           // let deleteTasks = 
           let e = document.querySelector(".todo-item-container");
         
-        //e.firstElementChild can be used.
+          //e.firstElementChild can be used.
           var child = e.lastElementChild; 
           while (child) {
               e.removeChild(child);
               child = e.lastElementChild;
-            
           } 
 
           // check if there is no category in the list, if so disable the form for submitting a task
@@ -111,16 +104,11 @@ categoryForm.onsubmit = function(e) {
             formSubmitButton.setAttribute('disabled', 'disabled')
           }
         }
-        // console.log(`this is no category check${noCategoryCheck()}`)
       })
     }
   }
   e.preventDefault();
 }
-
-
-
-
 
 taskForm.onsubmit = function(e) {
   console.log('pingas')
@@ -132,26 +120,10 @@ taskForm.onsubmit = function(e) {
       let updateTask = new PostCategory;
       updateTask.updateTaskDom(task)
       console.log(task["task-name"])
-      // console.log(`this is no category check${noCategoryCheck()}`)
-    }
-    // let taskDeleteArray = document.querySelectorAll('.todo-item > span')
-    
-    // console.log(taskDeleteArray)
-    
-    
+    }  
   }
 
   addTaskListeners()
-  // for (let task of taskDeleteArray){
-  //   console.log(task)
-  //   task.addEventListener('click', () => {
-  //     if(category.id === task.id){
-  //       console.log(`removing  ${task.id}`)
-  //       // category.remove();
-  //     } 
-  //   })
-  // }
-
   
   e.preventDefault();
 }
