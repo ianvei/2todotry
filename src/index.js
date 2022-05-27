@@ -45,7 +45,16 @@ let addTaskListeners = function(){
   }
 }
 
-
+// function for if there are no categories left
+let noCategoryCheck = function(){
+  let categoryRoot = document.querySelector('.category-card')
+  console.log(categoryRoot.children.length)
+  if (categoryRoot.children.length > 0) { 
+    return true
+  }
+  else {return false}
+  // return categoryRoot.hasChildNodes()
+}
 
 
 // click events
@@ -61,6 +70,9 @@ categoryForm.onsubmit = function(e) {
     let categoryP = category.querySelector('p')
     categoryP.addEventListener('click', () => {
       console.log('IM CLICKED')
+      let formSubmitButton = document.querySelector('#todo-submit > input[type=submit]:nth-child(4)')
+      console.log(formSubmitButton)
+      formSubmitButton.removeAttribute('disabled')
       taskDeleter.deleteTaskDom();
       // addTaskListeners();
       console.log(category.id)
@@ -79,7 +91,27 @@ categoryForm.onsubmit = function(e) {
       span.addEventListener('click', () => {
         if(category.id === span.id){
           category.remove();
-        } 
+          
+          // let deleteTasks = 
+          let e = document.querySelector(".todo-item-container");
+        
+        //e.firstElementChild can be used.
+          var child = e.lastElementChild; 
+          while (child) {
+              e.removeChild(child);
+              child = e.lastElementChild;
+            
+          } 
+
+          // check if there is no category in the list, if so disable the form for submitting a task
+          if (!noCategoryCheck()){
+            console.log(noCategoryCheck())
+            let formSubmitButton = document.querySelector('#todo-submit > input[type=submit]:nth-child(4)')
+            console.log(formSubmitButton)
+            formSubmitButton.setAttribute('disabled', 'disabled')
+          }
+        }
+        // console.log(`this is no category check${noCategoryCheck()}`)
       })
     }
   }
@@ -89,7 +121,7 @@ categoryForm.onsubmit = function(e) {
 
 
 
-// THE BIG ISSUE FOR THIS IS THAT THE DELETING LOGIC IS ONLY ADDED TO THE DELETE BUTTONS WHEN A FORM IS SUBMITTED, AND FOR SOME REASON IT DOESN'T STAY?
+
 taskForm.onsubmit = function(e) {
   console.log('pingas')
   for(let category of currentCategories){
@@ -100,6 +132,7 @@ taskForm.onsubmit = function(e) {
       let updateTask = new PostCategory;
       updateTask.updateTaskDom(task)
       console.log(task["task-name"])
+      // console.log(`this is no category check${noCategoryCheck()}`)
     }
     // let taskDeleteArray = document.querySelectorAll('.todo-item > span')
     
