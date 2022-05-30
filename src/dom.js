@@ -23,7 +23,8 @@ export default class PostCategory{
             console.log(`I am ${category.identifier}`)
             category["current"] = true
             categoryStatus.setName(category.identifier)
-
+            let categoryP = newCategoryDiv.querySelector('p')
+            categoryP.classList.add('punderline')
             console.log(categoryStatus)
             
            

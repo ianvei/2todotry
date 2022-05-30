@@ -6,7 +6,6 @@ import Task from "./task"
 
 let categoryForm = document.getElementById('new-category')
 let categoryRoot = document.querySelector('.category-card')
-// let taskRoot = document.querySelector('.todo-item-container')
 let taskForm = document.getElementById('todo-submit')
 let currentCategory = ''
 
@@ -16,6 +15,15 @@ let testCategory = new Category(document.getElementById('new-category'), documen
 let categoryStatus = new CurrentCategory
 let taskDeleter = new PostCategory
 categoryStatus.setName('default')
+
+function clearValues(){
+  const title = document.getElementById('task-name');
+  const date = document.getElementById('task-date');
+  const priority = document.getElementById('task-priority');
+  title.value = '';
+  date.value = '';
+  priority.value = '';
+}
 
 
 let addTaskListeners = function(){
@@ -53,6 +61,7 @@ let noCategoryCheck = function(){
 
 // click events
 categoryForm.onsubmit = function(e) {
+  
   let newCategory = testCategory.createNewCategory()
   let updateCategory = new PostCategory()
   updateCategory.updateCategoryDom(newCategory, categoryStatus);
@@ -61,14 +70,21 @@ categoryForm.onsubmit = function(e) {
   let categoryArray = document.getElementsByClassName('category-container')
   
   for (let category of categoryArray){
+    
     let categoryP = category.querySelector('p')
+    
     categoryP.addEventListener('click', () => {
-      console.log('IM CLICKED')
+      for(let category of categoryArray){
+        let categoryP = category.querySelector('p')
+        if(categoryP.classList.contains('punderline')){
+          categoryP.classList.remove('punderline')
+        }
+      }
+      category.classList.remove('punderline')
       let formSubmitButton = document.querySelector('#todo-submit > input[type=submit]:nth-child(4)')
       console.log(formSubmitButton)
       formSubmitButton.removeAttribute('disabled')
       taskDeleter.deleteTaskDom();
-      // addTaskListeners();
       console.log(category.id)
       for(let object of currentCategories){
         if(object.identifier === category.id){
@@ -78,6 +94,7 @@ categoryForm.onsubmit = function(e) {
           }
         }
       }
+     
     })
 
     let categoryDeleteArray = document.querySelectorAll('.category-container > span')
@@ -107,6 +124,8 @@ categoryForm.onsubmit = function(e) {
       })
     }
   }
+  let categoryNameText = document.getElementById('new-category-name')
+  categoryNameText.value = ''
   e.preventDefault();
 }
 
@@ -120,6 +139,7 @@ taskForm.onsubmit = function(e) {
       let updateTask = new PostCategory;
       updateTask.updateTaskDom(task)
       console.log(task["task-name"])
+      clearValues();
     }  
   }
 

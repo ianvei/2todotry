@@ -141,6 +141,12 @@
     font-size: 20px;
 }
 
+#todo-submit {
+    display: inline-flex;
+    justify-content: space-around;
+    gap: 20px;
+}
+
 .btn:hover{
     background-color: #8c63b5;
 }
@@ -178,6 +184,7 @@
     align-items: center;
     width: 100%;
     height: 90%;
+    gap: 20px;
     /* background-color: aquamarine; */
 }
 
@@ -186,7 +193,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
-    border: 1px solid black;
+    border-bottom: 2px solid var(--header-color);
     gap: 15px;
     padding-left: 25px;
     padding-right: 25px;
@@ -194,4 +201,8 @@
 
 .task-name{
     width: 60%;
+}
+
+.punderline{
+    border-bottom: 2px solid var(--header-color);
 }
